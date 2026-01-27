@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ระบบจัดการ Movie Hub - สำหรับผู้ดูแลระบบ">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>">
+  
+  <title>ระบบจัดการ | Movie Hub Admin</title>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body class="admin-page">
+  <!-- Login Section -->
+  <section class="login-section" id="loginSection">
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+          </svg>
+        </div>
+        <h1>MOVIE HUB</h1>
+        <p>ระบบจัดการสำหรับผู้ดูแล</p>
+      </div>
+      
+      <div class="login-error" id="loginError">
+        ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง
+      </div>
+      
+      <form class="login-form" id="loginForm">
+        <div class="form-group">
+          <label for="username">ชื่อผู้ใช้</label>
+          <input 
+            type="text" 
+            id="username" 
+            name="username" 
+            placeholder="กรอกชื่อผู้ใช้"
+            required
+            autocomplete="username"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="password">รหัสผ่าน</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            placeholder="กรอกรหัสผ่าน"
+            required
+            autocomplete="current-password"
+          >
+        </div>
+        
+        <button type="submit" class="btn-login">
+          เข้าสู่ระบบ
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Dashboard Section -->
+  <section class="admin-dashboard" id="dashboardSection" style="display: none;">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+          </svg>
+        </div>
+        <h2>ADMIN</h2>
+      </div>
+      
+      <nav>
+        <ul class="sidebar-nav">
+          <li>
+            <a href="#" class="active" data-section="movies">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
+                <line x1="7" y1="2" x2="7" y2="22"/>
+                <line x1="17" y1="2" x2="17" y2="22"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <line x1="2" y1="7" x2="7" y2="7"/>
+                <line x1="2" y1="17" x2="7" y2="17"/>
+                <line x1="17" y1="17" x2="22" y2="17"/>
+                <line x1="17" y1="7" x2="22" y2="7"/>
+              </svg>
+              จัดการหนัง
+            </a>
+          </li>
+          <li>
+            <a href="#" data-section="stats">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"/>
+                <line x1="12" y1="20" x2="12" y2="4"/>
+                <line x1="6" y1="20" x2="6" y2="14"/>
+              </svg>
+              สถิติ
+            </a>
+          </li>
+          <li>
+            <a href="#" data-section="settings">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              </svg>
+              ตั้งค่า
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <button class="btn-logout" id="logoutBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+          ออกจากระบบ
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <!-- Header -->
+      <header class="admin-header">
+        <h1>แดชบอร์ด</h1>
+        <div class="admin-user">
+          <div class="user-info">
+            <div class="user-name">ผู้ดูแลระบบ</div>
+            <div class="user-role">Administrator</div>
+          </div>
+          <div class="user-avatar">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+        </div>
+      </header>
+
+      <!-- Stats Section -->
+      <section class="stats-grid" id="statsSection">
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-title">หนังทั้งหมด</span>
+            <div class="stat-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
+                <line x1="7" y1="2" x2="7" y2="22"/>
+                <line x1="17" y1="2" x2="17" y2="22"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <line x1="2" y1="7" x2="7" y2="7"/>
+                <line x1="2" y1="17" x2="7" y2="17"/>
+                <line x1="17" y1="17" x2="22" y2="17"/>
+                <line x1="17" y1="7" x2="22" y2="7"/>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-value" id="totalMovies">0</div>
+          <div class="stat-change">+12  this week</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-title">หนังใหม่</span>
+            <div class="stat-icon green">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                <polyline points="17 6 23 6 23 12"/>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-value" id="newMovies">0</div>
+          <div class="stat-change">+5  this week</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-title">หนังเด่น</span>
+            <div class="stat-icon orange">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-value" id="featuredMovies">0</div>
+          <div class="stat-change">Featured</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-title">หมวดหมู่</span>
+            <div class="stat-icon blue">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-value" id="totalCategories">8</div>
+          <div class="stat-change">All categories</div>
+        </div>
+      </section>
+
+      <!-- Movies Table Section -->
+      <section class="content-section" id="moviesSection">
+        <div class="content-header">
+          <h2 class="content-title">รายการหนัง</h2>
+          <div class="content-actions">
+            <div class="search-box">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <input type="text" id="tableSearch" placeholder="ค้นหาหนัง...">
+            </div>
+            <button class="btn-add" id="addMovieBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+              เพิ่มหนังใหม่
+            </button>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>หนัง</th>
+                <th>ปี</th>
+                <th>คะแนน</th>
+                <th>หมวดหมู่</th>
+                <th>สถานะ</th>
+                <th>จัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="moviesTableBody">
+              <!-- Movies will be loaded by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pagination" id="pagination">
+          <!-- Pagination will be loaded by JavaScript -->
+        </div>
+      </section>
+    </main>
+  </section>
+
+  <!-- Add/Edit Movie Modal -->
+  <div class="modal" id="movieModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">เพิ่มหนังใหม่</h2>
+        <button class="modal-close" id="closeModal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <form id="movieForm">
+          <input type="hidden" id="movieId">
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="titleTh">ชื่อภาษาไทย <span>*</span></label>
+              <input type="text" id="titleTh" name="titleTh" required placeholder="เช่น ดูน ภาค 2">
+            </div>
+            
+            <div class="form-group">
+              <label for="title">ชื่อภาษาอังกฤษ <span>*</span></label>
+              <input type="text" id="title" name="title" required placeholder="เช่น Dune: Part Two">
+            </div>
+            
+            <div class="form-group">
+              <label for="year">ปีที่ฉาย <span>*</span></label>
+              <input type="number" id="year" name="year" required placeholder="2024" min="1900" max="2100">
+            </div>
+            
+            <div class="form-group">
+              <label for="rating">คะแนน (0-10)</label>
+              <input type="number" id="rating" name="rating" placeholder="8.5" min="0" max="10" step="0.1">
+            </div>
+            
+            <div class="form-group">
+              <label for="duration">ความยาว</label>
+              <input type="text" id="duration" name="duration" placeholder="เช่น 166 นาที">
+            </div>
+            
+            <div class="form-group">
+              <label for="quality">คุณภาพ</label>
+              <select id="quality" name="quality">
+                <option value="4K">4K</option>
+                <option value="HD">HD</option>
+                <option value="SD">SD</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="type">หมวดหมู่หลัก <span>*</span></label>
+              <select id="type" name="type" required>
+                <option value="action">แอคชั่น</option>
+                <option value="drama">ดราม่า</option>
+                <option value="comedy">คอมเมดี้</option>
+                <option value="horror">สยองขวัญ</option>
+                <option value="romance">รอมคอม</option>
+                <option value="scifi">ไซไฟ</option>
+                <option value="thriller">ระทึกขวัญ</option>
+                <option value="animation">การ์ตูน</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="director">ผู้กำกับ</label>
+              <input type="text" id="director" name="director" placeholder="เช่น Denis Villeneuve">
+            </div>
+            
+            <div class="form-group full-width">
+              <label for="genres">แท็กหมวดหมู่ (คั่นด้วยลูกน้ำ)</label>
+              <input type="text" id="genres" name="genres" placeholder="เช่น แอคชั่น, ไซไฟ, ดราม่า">
+            </div>
+            
+            <div class="form-group full-width">
+              <label for="cast">นักแสดง (คั่นด้วยลูกน้ำ)</label>
+              <input type="text" id="cast" name="cast" placeholder="เช่น Timothée Chalamet, Zendaya">
+            </div>
+            
+            <div class="form-group full-width">
+              <label for="description">เรื่องย่อ</label>
+              <textarea id="description" name="description" placeholder="เขียนเรื่องย่อของหนัง..."></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="poster">ลิงก์รูปโปสเตอร์</label>
+              <input type="url" id="poster" name="poster" placeholder="https://example.com/poster.jpg">
+              <small>แนะนำขนาด 500x750 พิกเซล</small>
+            </div>
+            
+            <div class="form-group">
+              <label for="backdrop">ลิงก์รูปพื้นหลัง</label>
+              <input type="url" id="backdrop" name="backdrop" placeholder="https://example.com/backdrop.jpg">
+              <small>แนะนำขนาด 1920x1080 พิกเซล</small>
+            </div>
+            
+            <div class="form-group full-width checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="featured" name="featured">
+                <span>แสดงในหนังเด่น</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" id="latest" name="latest">
+                <span>แสดงในหนังใหม่</span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="links-section">
+            <h4>ลิงก์รับชม</h4>
+            <div id="linksContainer">
+              <!-- Links will be added here -->
+            </div>
+            <button type="button" class="btn-add-link" id="addLinkBtn">
+              + เพิ่มลิงก์
+            </button>
+          </div>
+        </form>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" id="cancelBtn">ยกเลิก</button>
+        <button type="submit" class="btn-primary" id="saveBtn">บันทึก</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal" id="deleteModal">
+    <div class="modal-content" style="max-width: 400px;">
+      <div class="confirm-dialog">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <h3>ยืนยันการลบ</h3>
+        <p>คุณแน่ใจหรือไม่ว่าต้องการลบหนังเรื่องนี้? การกระทำนี้ไม่สามารถย้อนกลับได้</p>
+        <div class="confirm-actions">
+          <button class="btn-secondary" id="cancelDelete">ยกเลิก</button>
+          <button class="btn-primary" id="confirmDelete" style="background: #ef4444; box-shadow: none;">ลบ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="./js/common.js"></script>
+  <script src="./js/admin.js"></script>
+</body>
+</html>
